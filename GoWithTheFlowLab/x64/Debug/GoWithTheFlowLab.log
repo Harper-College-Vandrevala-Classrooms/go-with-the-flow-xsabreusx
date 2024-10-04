@@ -1,0 +1,5 @@
+﻿  GoWithTheFlowLab.cpp
+C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\materialClassRod.hpp(36,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'GoWithTheFlowLab.cpp')
+  
+  GoWithTheFlowLab.vcxproj -> C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\x64\Debug\GoWithTheFlowLab.exe
