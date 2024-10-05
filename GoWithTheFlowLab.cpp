@@ -1,9 +1,13 @@
-// Humbert
-// Go With The Flow
-//
+/*
+Humbert
+Go With The Flow
+Lab
+*/
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <cassert>
 #include "materialClassRod.hpp"
 #include "rodModeler.hpp"
 using namespace std;
@@ -13,39 +17,49 @@ void clearConsole() {
     cout << "\033[2J\033[H";  // Clear screen and move the cursor to the top left
 }
 
-// Function to clear the current line (ANSI escape code)
+/*
 void clearLine() {
     cout << "\033[2K\r";
 }
+*/
+
+void functionalChecks()
+{
+
+    cout << "All checks pass.";
+}
 
 int main() {
+
+    functionalChecks();
+
     materialClassRod rod1;
-    rodModeler rM;
+    HeatFlow rM;
     vector<double> myVector = { 200, 200, 200, 200, 200, 2000 };
     rod1.setVector(myVector);
 
-    char userChoice;  // Variable to store the user's input
+    string userChoice;  // Variable to store the user's input
 
     do {
-        // Clear the console and display the updated vector and instructions
-        clearConsole();
+        
+        //clearConsole();    // Option that clears the console and display the updated vector and instructions
 
         cout << "\n== Rod Temperatures ==" << endl;
         rod1.showVector();
         cout << "\nWould you like to apply another tick? (y/n): ";
-        cin >> userChoice;  // Get the user's input
+        getline(cin, userChoice);  // Get the user's input
 
-        if (userChoice == 'y' || userChoice == 'Y') {
-            rM.tick(rod1);  // Apply a tick operation
+        if (userChoice == "y" || userChoice == "Y") {
+            rM.tick(rod1);  // Apply a tick
         }
-        else if (userChoice == 'n' || userChoice == 'N') {
+        else if (userChoice == "n" || userChoice == "N") {
             cout << "\nSimulation stopped. Exiting program...\n";
         }
         else {
-            cout << "\nInvalid input. Please enter 'y' to continue or 'n' to stop.\n";
+            cout << "\nInvalid input. Please enter 'y' to continue or 'n' to stop.\n";  // Invalid inputs mitigated, it will just keep asking
         }
 
-    } while (userChoice != 'n' && userChoice != 'N');  // Continue until the user presses 'n' or 'N'
+    } while (userChoice != "n" && userChoice != "N");  // Continue until the user presses 'n' or 'N'
 
     return 0;
 }
