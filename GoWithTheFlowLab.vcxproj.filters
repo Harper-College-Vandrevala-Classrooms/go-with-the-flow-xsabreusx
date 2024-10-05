@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="materialClassRod.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rodModeler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -8,7 +8,6 @@ Lab
 #include <vector>
 #include <string>
 #include <cassert>
-#include "materialClassRod.hpp"
 #include "rodModeler.hpp"
 using namespace std;
 
@@ -23,34 +22,47 @@ void clearLine() {
 }
 */
 
-void functionalChecks()
-{
-
-    cout << "All checks pass.";
-}
-
 int main() {
+    //////////////////      TEST AREA    ////////////////////////
 
-    functionalChecks();
+    vector <double> testVector = { 1, 2, 3, 4 };
+    HeatFlow hTest;
+    cout << "All checks pass.";
 
-    materialClassRod rod1;
-    HeatFlow rM;
+    /////////////////////////////////////////////////////////////
+    
+
+
+
+
+
+
+    /////////// Interactive Area /////////////////////
+
+    HeatFlow rod1;
+
     vector<double> myVector = { 200, 200, 200, 200, 200, 2000 };
     rod1.setVector(myVector);
 
     string userChoice;  // Variable to store the user's input
+
+    int lengthR = 0;
+    double K = 1;
+    double Ti = 0;
+    int sinkN = 0;
+
 
     do {
         
         //clearConsole();    // Option that clears the console and display the updated vector and instructions
 
         cout << "\n== Rod Temperatures ==" << endl;
-        rod1.showVector();
+        rod1.pretty_print();
         cout << "\nWould you like to apply another tick? (y/n): ";
         getline(cin, userChoice);  // Get the user's input
 
         if (userChoice == "y" || userChoice == "Y") {
-            rM.tick(rod1);  // Apply a tick
+            rod1.tick();  // Apply a tick
         }
         else if (userChoice == "n" || userChoice == "N") {
             cout << "\nSimulation stopped. Exiting program...\n";
@@ -60,6 +72,8 @@ int main() {
         }
 
     } while (userChoice != "n" && userChoice != "N");  // Continue until the user presses 'n' or 'N'
+
+    //////////////////////////////////////////////////
 
     return 0;
 }
