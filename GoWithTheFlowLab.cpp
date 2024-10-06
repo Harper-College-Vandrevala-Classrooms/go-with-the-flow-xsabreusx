@@ -44,15 +44,15 @@ int main() {
     cout << "\n\n***All assert checks passed.***";
     cout << "\n***For user: please verify test values match expectations.***";
     cout << "\n\n[Program Starting with sample simulation]\n\n";
-
+    
     /////////////////////////////////////////////////////////////
 
 
     /////////// Interactive Sample Sim Area /////////////////////
 
-    HeatFlow rod1;
+    HeatFlow rod1;         //exammple of a rod going
 
-    vector<double> myVector = { 200, 200, 200, 200, 200, 2000 };
+    vector<double> myVector = { 300, 300, 300, 300, 300, 300 };
     rod1.setVector(myVector);
 
     string userChoice;  // Variable to store the user's input
@@ -62,14 +62,42 @@ int main() {
     double Ti = 0;
     int sinkN = 0;
 
+    cout << "\nWould you like to apply sources or sinks? (y/anything else is no): ";
+    string sourcesandsinksanswer;
+    getline(cin, sourcesandsinksanswer);
+
+    if (sourcesandsinksanswer == "y")
+    {
+        cout << "\nHow many? Input an integer greater than or equal to 0: ";
+        int numberS;
+        cin >> numberS;
+        while (cin.fail() || numberS < 0) {
+            cin.clear();
+            cin.ignore();
+            cout << "\nInvalid input. Please try again: ";
+            cin >> numberS;
+        }
+        rod1.setSinks(numberS);
+        cout << "\nProceeding to specify sources and sinks.";
+    }
+    else {
+        sourcesandsinksanswer = "n";
+        cout << "\nPress Enter to proceed. ";
+    }
+    
+   
+    
+    rod1.ObtainandApplySinksandSources(); // Option to apply sinks and sources to the specified rod.
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Protects next cin input from left over new line characters after using the getline function.
 
     do {
         
         //clearConsole();    // Option that clears the console and display the updated vector and instructions
-
-        cout << "\n== Rod Temp Sim (in Kelvin) ==" << endl;
+   
+        cout << "\n\n== Rod Temp Sim (in Kelvin) ==\n";
         rod1.pretty_print();
-        cout << "\nWould you like to apply another tick? (y/n): ";
+        
+        cout << "\nWould you like to apply a tick? (y/n): ";
         getline(cin, userChoice);  // Get the user's input
 
         if (userChoice == "y" || userChoice == "Y") {

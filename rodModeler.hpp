@@ -14,6 +14,11 @@ private:
     double medium_ = 273;
     int sources_sinks_ = 0;
 
+    vector <int> tempV;                 // These variables allow for managing the sinks and sources. 
+    vector <double> sinkSourceV;
+    double tempSinkSource=0;
+    int vPositions=0;
+
 public:
 
     HeatFlow() {}; // A constructor that doesn't need anything.
@@ -31,19 +36,30 @@ public:
     void tick() {
 
         vector<double> updatedRod(getVectorSize());  // Temporary vector to store new values
-
+        // This algorithm obtains the new values of the vector and properly applies sinks and sources if needed.
         for (int i = 0; i < getVectorSize(); ++i) {
             if (i == 0) {
 
                 updatedRod[i] = (getVectorElement(i) + K_ * (getVectorElement(i + 1) - 2 * getVectorElement(i) + medium_));
+                
             }
             else if (i == getVectorSize() - 1) {
 
                 updatedRod[i] = (getVectorElement(i) + K_ * (medium_ - (2 * getVectorElement(i)) + getVectorElement(i - 1)));
+
             }
             else {
 
                 updatedRod[i] = (getVectorElement(i) + K_ * (getVectorElement(i + 1) - 2 * getVectorElement(i) + getVectorElement(i - 1)));
+
+            }
+
+            if (sources_sinks_ != 0) // Applies sinks and sources at the end of each tick, thereby remaining constant.
+            {
+                for (int i = 0; i < sources_sinks_; i++)
+                {
+                    updatedRod[tempV[i]-1] = sinkSourceV[i];
+                }
             }
         }
 
@@ -75,7 +91,7 @@ public:
         cout << "\n\n";
     }
 
-    void test_print() const {           // For doing start up tests.
+    void test_print() const {           // For doing start up tests
         cout << "\nVector Values: ";
         for (double e : rod_) {
             cout << e << " ";
@@ -122,11 +138,11 @@ public:
         return sources_sinks_;
     }
 
-    void applySinksandSources() {  // This function is called in order to set up sinks and sources of heat in the rod.
+    void setSinks(int s) {
+        sources_sinks_ = s;
+    }
 
-        vector <int> tempV;
-        double tempSinkSource;
-        int vPositions;
+    void ObtainandApplySinksandSources() {  // This function is called in order to set up sinks and sources of heat in the rod
 
         if (sources_sinks_ == 0)
         {
@@ -134,11 +150,11 @@ public:
         }
         else if (rod_.size() - 1 <= sources_sinks_)
         {
-            sources_sinks_ = rod_.size() - 1;
-            cout << "\nSpecify rod section(s) that has sink or source: ";
+            sources_sinks_ = rod_.size() - 1; // Obtains sinks and sources positions in the rod
+            cout << "\nSinks and sources adjusted to accomodate length of rod. \nSpecify a rod section that has a sink or source: ";
             for (int i = 0; i < sources_sinks_; i++) {
                 cin >> vPositions;
-                while (cin.fail() || vPositions < 0 || vPositions > rod_.size() - 1) {
+                while (cin.fail() || vPositions <= 0 || vPositions > rod_.size() - 1) {
                     cin.clear();
                     cin.ignore();
                     cout << "\nInvalid input. Please try again: ";
@@ -146,13 +162,33 @@ public:
                 }
                 tempV.push_back(vPositions);
             }
+            // Obtains values for the sinks and sources
+            cout << "\nSpecify the Temperature values of sources or sinks in the order entered one at a time: ";
+            for (int i = 0; i < sources_sinks_; i++) {
+                cin >> tempSinkSource;
+                while (cin.fail() || tempSinkSource < 0) {
+                    cin.clear();
+                    cin.ignore();
+                    cout << "\nInvalid input. Please try again: ";
+                    cin >> tempSinkSource;
+                }
+                sinkSourceV.push_back(tempSinkSource);
+            }
+
+            // This for loop inputs the sinks and sources into the rod vector
+            for (int i = 0; i < sources_sinks_; i++)
+            {
+                rod_[tempV[i]-1] = sinkSourceV[i];
+            }
 
         }
+        // Obtains sinks and sources positions in the rod also
         else {
-            cout << "\nSpecify rod section(s) that has sink or source: ";
+            cout << "\nSpecify a rod section that has a sink or source. ";
             for (int i = 0; i < sources_sinks_; i++) {
+                cout << "\nAwaiting sink position input: ";
                 cin >> vPositions;
-                while (cin.fail() || vPositions < 0 || vPositions > rod_.size() - 1) {
+                while (cin.fail() || vPositions <= 0 || vPositions > rod_.size() - 1) {
                     cin.clear();
                     cin.ignore();
                     cout << "\nInvalid input. Please try again: ";
@@ -160,8 +196,26 @@ public:
                 }
                 tempV.push_back(vPositions);
             }
-        }
+            // Obtains values for the sinks and sources
+            cout << "\nSpecify the Temperature values of sources or sinks in the order entered one at a time.";
+            for (int i = 0; i < sources_sinks_; i++) {
+                cout << "\nAwaiting sink Temperature input: ";
+                cin >> tempSinkSource;
+                while (cin.fail() || tempSinkSource < 0) {
+                    cin.clear();
+                    cin.ignore();
+                    cout << "\nInvalid input. Please try again: ";
+                    cin >> tempSinkSource;
+                }
+                sinkSourceV.push_back(tempSinkSource);
+            }
 
+            // This for loop inputs the sinks and sources into the rod vector
+            for (int i = 0; i < sources_sinks_; i++)
+            {
+                rod_[tempV[i]-1] = sinkSourceV[i];
+            }
+        }
 
     }
 };
