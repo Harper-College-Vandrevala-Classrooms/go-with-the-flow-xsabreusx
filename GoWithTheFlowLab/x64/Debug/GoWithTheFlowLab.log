@@ -1,8 +1,11 @@
 ﻿  GoWithTheFlowLab.cpp
-C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\rodModeler.hpp(114,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\rodModeler.hpp(92,27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'GoWithTheFlowLab.cpp')
   
-C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\rodModeler.hpp(153,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\rodModeler.hpp(132,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'GoWithTheFlowLab.cpp')
+  
+C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\rodModeler.hpp(171,42): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'GoWithTheFlowLab.cpp')
   
   GoWithTheFlowLab.vcxproj -> C:\Users\betob\OneDrive\Academics\CSC122 Computer Science II\Go with the Flow Lab\go-with-the-flow-xsabreusx\x64\Debug\GoWithTheFlowLab.exe

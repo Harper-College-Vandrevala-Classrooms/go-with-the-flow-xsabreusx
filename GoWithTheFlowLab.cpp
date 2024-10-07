@@ -2,6 +2,7 @@
 Humbert
 Go With The Flow
 Lab
+* Uncomment the clearConsole function in the Interactive Sample area for a satisfying experience. *
 */
 
 #include <iostream>
@@ -23,13 +24,17 @@ void clearLine() {
 */
 
 int main() {
+    //------------------------------------------------------------
     //////////////////      TEST AREA    ////////////////////////
+    //----------------------------------------------------------
     HeatFlow hTest(4, 0.05, 100, 0);
     assert(hTest.getVectorElement(0) == 100);
     assert(hTest.getVectorSize() == 4);
     assert(hTest.getK() == 0.05);
     assert(hTest.getTi() == 100);
     assert(hTest.getSinks() == 0);
+    cout << "\n-> All assert checks passed.\n";
+
     cout << "\nUnit tests running:";
     cout << "\nVerify start point = 100 100 100 100";
     hTest.test_print();
@@ -40,19 +45,19 @@ int main() {
     hTest.tick();
     hTest.tick();
     cout << "\n3 tick operation performed, verify values = 129.828 102.344 102.344 129.828";
-    hTest.test_print();
-    cout << "\n\n***All assert checks passed.***";
-    cout << "\n***For user: please verify test values match expectations.***";
-    cout << "\n\n[Program Starting with sample simulation]\n\n";
+    hTest.test_print();   
+    cout << "\n\n-> User, please verify test values match expectations.";
+   
     
     /////////////////////////////////////////////////////////////
 
-
+    //------------------------------------------------------------
     /////////// Interactive Sample Sim Area /////////////////////
+    //---------------------------------------------------------
 
     HeatFlow rod1;         //exammple of a rod going
 
-    vector<double> myVector = { 300, 300, 300, 300, 300, 300 };
+    vector<double> myVector = { 300, 300, 300, 300, 300, 600 };
     rod1.setVector(myVector);
 
     string userChoice;  // Variable to store the user's input
@@ -61,7 +66,7 @@ int main() {
     double K = 1;
     double Ti = 0;
     int sinkN = 0;
-
+    cout << "\n\n[Program Starting with sample simulation]\n\nRod Length: " << rod1.getVectorSize() << "\n\n";
     cout << "\nWould you like to apply sources or sinks? (y/anything else is no): ";
     string sourcesandsinksanswer;
     getline(cin, sourcesandsinksanswer);
@@ -92,7 +97,7 @@ int main() {
 
     do {
         
-        //clearConsole();    // Option that clears the console and display the updated vector and instructions
+        //clearConsole();    // Optional function that clears the console and display the updated vector and instructions
    
         cout << "\n\n== Rod Temp Sim (in Kelvin) ==\n";
         rod1.pretty_print();

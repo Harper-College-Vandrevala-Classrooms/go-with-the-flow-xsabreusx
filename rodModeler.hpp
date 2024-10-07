@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 class HeatFlow {
@@ -9,7 +10,7 @@ private:
     vector<double> rod_;
 
     int lengthRod_ = 0; //Only used when the specific constructor is employed.
-    double K_ = 0.01;
+    double K_ = 0.03;
     double Ti_ = 0;
     double medium_ = 273;
     int sources_sinks_ = 0;
@@ -82,13 +83,30 @@ public:
         }
     }
 
-    void pretty_print() const {
-        cout << "\n\n| ";
+
+    void pretty_print() const { // Upgraded pretty_print!
+        
+        int max_width = 0;
+        // Convert number to string and find its length
         for (double e : rod_) {
-            //cout << "|" << static_cast<int> (e) << "|";
-            cout << e << " | ";
+            int num_width = to_string(static_cast<int>(e)).length();
+            max_width = max(max_width, num_width);
         }
-        cout << "\n\n";
+
+        // Add some padding 
+        max_width += 2; 
+
+        // Top border
+        cout << "\n" << string((max_width + 3) * rod_.size(), '=') << "\n";
+        cout << "| ";
+
+        // Removing the decimals for neatness 
+        for (double e : rod_) {
+            cout << setw(max_width) << static_cast<int>(e) << " | ";
+        }
+
+        // Bottom border
+        cout << "\n" << string((max_width + 3) * rod_.size(), '=') << "\n";
     }
 
     void test_print() const {           // For doing start up tests
